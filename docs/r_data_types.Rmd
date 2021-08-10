@@ -65,6 +65,10 @@ class(df_1$species)
 max_count <- aggregate(count ~ count, data = df_1, max)
 max_count
 
+#OR 
+
+max_count2 <- max(df_1$count)
+max_count2
 ```
 
 

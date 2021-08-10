@@ -61,14 +61,18 @@ ggplot(data = mc_salamanders, aes(x = length1, y = weight)) +
 mc_trout <- mack_inverts %>% 
   filter(species == "ONCL")
 
-ggplot(data = mc_trout, aes(x = length1, y = weight)) +
-  geom_point(aes(color = reach), alpha = 0.5) +
-  labs(x = "total or snout-fork length (mm)", 
+mc_trout_plot <- ggplot(data = mc_trout, aes(x = length1, y = weight)) +
+  geom_point(aes(color = reach), alpha = 0.5, size = 1.5) +
+  scale_color_manual(values = c("blue", "purple", "green")) +
+  facet_wrap(~reach) +
+  labs(x = "Total or Snout-fork Length (mm)", 
       y = "Weight (g)", 
       title = "Snount Length Versus Weight in Cuttthroat Trout", 
       subtitle = "Monitoring of Cuttthroat Trout",
       caption = "Cuttthroat Trout have been monitered in two standard reaches of Mack Creek in the H.J. Andrews Experimental Forest since 1987.")
 
+ggsave(here::here("figs", "cutthroat_size.png"), plot = mc_trout_plot)  
+  
 ```
 
 
