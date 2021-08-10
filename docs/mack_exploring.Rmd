@@ -1,0 +1,77 @@
+---
+title: "Wild Data"
+author: "Allie Cole"
+date: "8/10/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(here)
+library(tidyverse)
+library(janitor)
+```
+
+
+### Uploading my data 
+
+```{r}
+mack_inverts <- read_csv(here::here("data", "AS00601.csv"))
+```
+
+# Now messing around 
+
+```{r}
+mack_inverts <- clean_names(mack_inverts)
+
+# messing around 
+
+mc_wt_5 <- mack_inverts$WEIGHT[5]
+mc_wt_5
+
+mc_length_8_20 <- mack_inverts$LENGTH1[8:20]
+mc_length_8_20
+
+mc_dates <- mack_inverts$SAMPLEDATE
+mc_dates
+```
+
+### Subset of the data
+
+```{r}
+mc_salamanders <- mack_inverts %>% 
+  filter(species == "DITE")
+```
+
+### scatter plot 
+
+```{r}
+ggplot(data = mc_salamanders, aes(x = length1, y = weight)) +
+  geom_point() +
+  labs(x = "Snout-vent Length (mm)", 
+      y = "Weight (g)", 
+      title = "Snount Length Versus Weight in Salamanders", 
+      subtitle = "Monitoring of Pacific Giant Salamanders",
+      caption = "Total or snout-fork length was used for Onchorhyncus, while snout-vent was used for Dicamptodon. The total weight was used for each individual salamander, but none taken after 1999")
+```
+
+
+
+```{r}
+mc_trout <- mack_inverts %>% 
+  filter(species == "ONCL")
+
+ggplot(data = mc_trout, aes(x = length1, y = weight)) +
+  geom_point(aes(color = reach), alpha = 0.5) +
+  labs(x = "total or snout-fork length (mm)", 
+      y = "Weight (g)", 
+      title = "Snount Length Versus Weight in Cuttthroat Trout", 
+      subtitle = "Monitoring of Cuttthroat Trout",
+      caption = "Cuttthroat Trout have been monitered in two standard reaches of Mack Creek in the H.J. Andrews Experimental Forest since 1987.")
+
+```
+
+
+
+
+
