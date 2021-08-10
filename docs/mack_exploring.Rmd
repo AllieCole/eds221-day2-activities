@@ -71,6 +71,9 @@ mc_trout_plot <- ggplot(data = mc_trout, aes(x = length1, y = weight)) +
       subtitle = "Monitoring of Cuttthroat Trout",
       caption = "Cuttthroat Trout have been monitered in two standard reaches of Mack Creek in the H.J. Andrews Experimental Forest since 1987.")
 
+mc_trout_plot
+
+
 ggsave(here::here("figs", "cutthroat_size.png"), plot = mc_trout_plot)  
   
 ```
